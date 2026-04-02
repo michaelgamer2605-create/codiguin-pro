@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Gerador de Codiguin PRO</title>
+  <style>
+    body {
+      background: black;
+      color: #00ffcc;
+      text-align: center;
+      font-family: monospace;
+    }
+
+    h1 {
+      color: #00ffcc;
+      text-shadow: 0 0 10px #00ffcc;
+    }
+
+    #codigo {
+      margin-top: 20px;
+      font-size: 28px;
+      letter-spacing: 4px;
+      text-shadow: 0 0 10px #00ffcc;
+    }
+
+    button {
+      margin-top: 15px;
+      padding: 12px;
+      font-size: 16px;
+      background: #00ffcc;
+      color: black;
+      border: none;
+      border-radius: 10px;
+    }
+
+    .matrix {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -1;
+      overflow: hidden;
+      opacity: 0.1;
+    }
+  </style>
+</head>
+
+<body>
+
+<h1>⚡ GERADOR DE CODIGUIN PRO ⚡</h1>
+
+<p id="codigo">CLIQUE PARA GERAR</p>
+
+<button onclick="gerar()">GERAR</button>
+<br>
+<button onclick="copiar()">COPIAR</button>
+
+<p id="contador">Gerados: 0</p>
+
+<div class="matrix" id="matrix"></div>
+
+<script>
+let total = 0;
+
+function gerar() {
+  let chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+  let codigo = "";
+
+  document.getElementById("codigo").innerText = "GERANDO...";
+
+  setTimeout(() => {
+    for (let i = 0; i < 12; i++) {
+      codigo += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+
+    document.getElementById("codigo").innerText = codigo;
+    total++;
+    document.getElementById("contador").innerText = "Gerados: " + total;
+  }, 800);
+}
+
+function copiar() {
+  let texto = document.getElementById("codigo").innerText;
+  navigator.clipboard.writeText(texto);
+  alert("Copiado!");
+}
+
+// efeito matrix fake
+let matrix = document.getElementById("matrix");
+
+for (let i = 0; i < 100; i++) {
+  let span = document.createElement("span");
+  span.innerText = Math.random().toString(36).substring(2);
+  span.style.display = "block";
+  span.style.color = "#00ffcc";
+  matrix.appendChild(span);
+}
+</script>
+
+</body>
+</html>
